@@ -26,29 +26,6 @@ if (cursorGlow && matchMedia('(pointer:fine)').matches) {
 const year = document.querySelector('#year');
 if (year) year.textContent = String(new Date().getFullYear());
 
-const filters = document.querySelectorAll('.filter');
-const portfolioEntries = document.querySelectorAll('.portfolio-entry');
-
-filters.forEach((button) => {
-  button.addEventListener('click', () => {
-    const choice = button.dataset.filter ?? 'all';
-
-    filters.forEach((filter) => {
-      const isActive = filter === button;
-      filter.classList.toggle('active', isActive);
-      filter.setAttribute('aria-pressed', String(isActive));
-    });
-
-    portfolioEntries.forEach((entry) => {
-      const types = entry.dataset.type?.split(' ') ?? [];
-      entry.classList.toggle(
-        'is-filtered-out',
-        choice !== 'all' && !types.includes(choice),
-      );
-    });
-  });
-});
-
 const copyButton = document.querySelector('.copy-email');
 copyButton?.addEventListener('click', async () => {
   const email = copyButton.dataset.email;
